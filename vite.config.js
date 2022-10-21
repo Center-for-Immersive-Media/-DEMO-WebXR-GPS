@@ -12,7 +12,7 @@ module.exports = defineConfig({
     },
   },
   assetsInclude: ["**/*.gltf", "**/*.glb", "**/*.mp4", "**/*.json"],
-  // server: {
-  //   https: true,
-  // },
+  server: {
+    https: true,
+  },
 });

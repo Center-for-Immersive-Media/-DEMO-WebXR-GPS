@@ -1,10 +1,10 @@
 import * as THREE from "three";
-import { VRButton } from "three/examples/jsm/webxr/VRButton.js";
+import { ARButton } from "three/examples/jsm/webxr/ARButton.js";
 import Experience from "@Experience/Experience.js";
 
 export default class Renderer {
   constructor() {
-    this.vr = window.location.hash === "#vr";
+    this.ar = window.location.hash === "#ar";
     this.experience = new Experience();
     this.canvas = this.experience.canvas;
     this.sizes = this.experience.sizes;
@@ -18,19 +18,20 @@ export default class Renderer {
     this.instance = new THREE.WebGLRenderer({
       canvas: this.canvas,
       antialias: true,
+      alpha: true,
     });
     this.instance.physicallyCorrectLights = true;
-    this.instance.outputEncoding = THREE.sRGBEncoding;
-    this.instance.toneMapping = THREE.CineonToneMapping;
-    this.instance.toneMappingExposure = 1.75;
-    this.instance.shadowMap.enabled = true;
-    this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
-    this.instance.setClearColor("#211d20");
+    // this.instance.outputEncoding = THREE.sRGBEncoding;
+    // this.instance.toneMapping = THREE.CineonToneMapping;
+    // this.instance.toneMappingExposure = 1.75;
+    // this.instance.shadowMap.enabled = true;
+    // this.instance.shadowMap.type = THREE.PCFSoftShadowMap;
+    // this.instance.setClearColor("#ff0000");
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
-    if (this.vr) {
+    if (this.ar) {
       this.instance.xr.enabled = true;
-      document.body.appendChild(VRButton.createButton(this.instance));
+      document.body.appendChild(ARButton.createButton(this.instance));
     }
   }
 
@@ -40,10 +41,10 @@ export default class Renderer {
   }
 
   update() {
-    if (this.vr) {
-      this.instance.setAnimationLoop(() => {
-        this.instance.render(this.scene, this.camera.instance);
-      });
+    if (this.ar) {
+      this.instance.setAnimationLoop(
+        this.instance.render(this.scene, this.camera.instance)
+      );
     } else {
       this.instance.render(this.scene, this.camera.instance);
     }

@@ -6,4 +6,4 @@ import ServiceWorker from "@Experience/Utils/RegisterServiceWorker.js";
 const canvas = document.querySelector("canvas.webgl");
 const experience = new Experience(canvas);
 
-new ServiceWorker();
+// new ServiceWorker();
