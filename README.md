@@ -1,1 +1,1 @@
-# threejs-pwa-vr
+# WebXR & GPS Demo
