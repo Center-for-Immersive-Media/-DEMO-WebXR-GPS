@@ -2,9 +2,6 @@ import path, { resolve } from "path";
 import { defineConfig } from "vite";
 
 module.exports = defineConfig({
-  build: {
-    outDir: "./docs",
-  },
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./"),
