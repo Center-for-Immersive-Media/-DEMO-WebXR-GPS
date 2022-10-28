@@ -29,10 +29,10 @@ export default class Renderer {
     // this.instance.setClearColor("#ff0000");
     this.instance.setSize(this.sizes.width, this.sizes.height);
     this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
-    if (this.ar) {
-      this.instance.xr.enabled = true;
-      document.body.appendChild(ARButton.createButton(this.instance));
-    }
+
+    this.instance.xr.enabled = true;
+    document.body.appendChild(ARButton.createButton(this.instance));
+    // console.log(this.instance);
   }
 
   resize() {
@@ -40,13 +40,13 @@ export default class Renderer {
     this.instance.setPixelRatio(Math.min(this.sizes.pixelRatio, 2));
   }
 
+  render() {
+    this.instance.render(this.scene, this.camera);
+  }
+
   update() {
-    if (this.ar) {
-      this.instance.setAnimationLoop(
-        this.instance.render(this.scene, this.camera.instance)
-      );
-    } else {
-      this.instance.render(this.scene, this.camera.instance);
+    if (this.instance.xr.isPresenting) {
+      this.instance.setAnimationLoop(this.render());
     }
   }
 }

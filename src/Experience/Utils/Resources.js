@@ -2,7 +2,6 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
 import EventEmitter from "@Utils/EventEmitter.js";
 
-import Debug from "@Utils/Debug.js";
 import Experience from "@Experience/Experience.js";
 
 export default class Resources extends EventEmitter {
